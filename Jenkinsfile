@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:18' }
+    }
 
     stages {
         stage('Checkout') {
@@ -10,21 +12,18 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing dependencies...'
                 sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
                 sh 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
                 sh 'npm test'
             }
         }
